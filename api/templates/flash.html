@@ -1,0 +1,11 @@
+{% with messages = get_flashed_messages() %} {% if messages %}
+<div
+  class="border border-success rounded alert-success mx-auto"
+  id="flash-message">
+  <div class="text-center" role="alert">
+    {% for message in messages %}
+    <p>{{ message }}</p>
+    {% endfor %}
+  </div>
+</div>
+{% endif %} {% endwith %}

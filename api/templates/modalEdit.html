@@ -1,0 +1,102 @@
+<!-- Edit Modal -->
+{% for row in tbl_Data %}
+<div
+  class="modal fade"
+  id="modalEdit-{{ row.id }}"
+  tabindex="-1"
+  aria-labelledby="editModalLabel-{{ row.id }}"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel-{{ row.id }}">Edit Contract</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          action="{{ url_for('edit_bounty') }}"
+          id="editForm-{{ row.id }}"
+          method="POST">
+          <div class="form-group row justify-content-between">
+            <label for="" class="col-sm-2 col-form-label">contract_id</label>
+            <div class="col-sm-8 center">
+              <input
+                type="text"
+                readonly
+                class="form-control"
+                name="id"
+                id="id_id"
+                placeholder="{{ row.id }}"
+                value="{{ row.id }}" />
+            </div>
+          </div>
+          <div class="form-group row justify-content-between">
+            <label for="" class="col-sm-2 col-form-label">Target</label>
+            <div class="col-sm-8 center">
+              <input
+                type="text"
+                class="form-control"
+                name="bounty_target"
+                id="id_inputBountyTarget"
+                placeholder="{{ row.bounty_target }}"
+                value="{{ row.bounty_target }}" />
+            </div>
+          </div>
+          <div class="form-group row justify-content-between">
+            <label for="" class="col-sm-2 col-form-label">Amount</label>
+            <div class="col-sm-8 center">
+              <input
+                type="number"
+                class="form-control"
+                id="id_inputBountyAmount"
+                name="bounty_amount"
+                value="{{ row.bounty_amount }}"
+                placeholder="{{ row.formatted_bounty_amount }}" />
+            </div>
+          </div>
+          <div class="form-group row justify-content-between">
+            <label for="" class="col-sm-2 col-form-label">Hunter</label>
+            <div class="col-sm-8 center">
+              <input
+                type="text"
+                class="form-control"
+                id="id_inputBountyTarget"
+                name="bounty_hunter"
+                placeholder="{{ row.bounty_hunter }}"
+                value="{{ row.bounty_hunter }}" />
+            </div>
+          </div>
+          <div class="form-group row justify-content-between">
+            <label for="" class="col-sm-2 col-form-label">published_date</label>
+            <div class="col-sm-8 center">
+              <input
+                type="date"
+                class="form-control"
+                id="id_published_date"
+                name="published_date"
+                placeholder="{{ row.published_date }}"
+                value="{{ row.published_date }}" />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button-close"
+          class="btn btn-secondary"
+          data-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          form="editForm-{{ row.id }}">
+          Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
