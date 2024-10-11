@@ -44,18 +44,6 @@ LICENSE            Pipfile.lock       api                helm
 
 ```
 
-python-stackgen-db git:(main) sh install-chart.sh python-db-stackgen
-"bitnami" has been added to your repositories
-Release "python-db-stackgen" does not exist. Installing it now.
-NAME: python-db-stackgen
-LAST DEPLOYED: Fri Oct 11 17:17:48 2024
-NAMESPACE: default
-STATUS: deployed
-REVISION: 1
-TEST SUITE: None
-```
-
-
 
 ### Install ArgoCD 
 
