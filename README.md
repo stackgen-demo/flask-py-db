@@ -2,7 +2,6 @@
 A simple Flask Python CRUD app to understand how the basics of CRUD works with a database
 
 
-
 # run locally 
 
 Use the .devcontainer to run the program inside of .devcontainer.
@@ -37,6 +36,8 @@ volumes:
 
 ```
 ## export helm chart 
+
+```
 
 Dockerfile         Pipfile            README.md          docker-compose.yml
 LICENSE            Pipfile.lock       api                helm
@@ -106,3 +107,5 @@ spec:
 kubectl apply -f flask-py-db.yaml 
 ```
 
+
+try stackgen - https://cloud.stackgen.com 
