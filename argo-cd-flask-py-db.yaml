@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: python-stackgen-db
+  namespace: argocd
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://github.com/stackgen-demo/flask-py-db
+    targetRevision: HEAD  # You can specify a branch, tag, or commit hash as needed
+    path: helm/python-stackgen-db  # Specify the path to the Helm chart within the repository
+    helm:
+      valueFiles:
+        - values.yaml  # Use the values.yaml file to provide custom configurations
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

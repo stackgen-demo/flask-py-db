@@ -36,10 +36,10 @@ volumes:
   postgres-data:
 
 ```
+## export helm chart 
 
-### export generated helm IaC
-
-
+Dockerfile         Pipfile            README.md          docker-compose.yml
+LICENSE            Pipfile.lock       api                helm
 
 ### Install ArgoCD 
 
@@ -69,25 +69,25 @@ get the initial admin password. By default, it is stored as a secret in the Argo
 kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d
 ```
 
-write deployement file for our helm chart 
+write deployement file ```flask-py-db.yaml``` 
 
 ```
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: guestbook-helm
+  name: python-stackgen-db
   namespace: argocd
 spec:
   destination:
     namespace: default
     server: https://kubernetes.default.svc
   source:
-    chart: guestbook  # Specify the chart name
-    repoURL:   # Helm chart repository URL
-    targetRevision: HEAD  # Could be a tag, branch, or version number
+    repoURL: https://github.com/stackgen-demo/flask-py-db
+    targetRevision: HEAD  # You can specify a branch, tag, or commit hash as needed
+    path: helm/python-stackgen-db  # Specify the path to the Helm chart within the repository
     helm:
-      valueFiles:  # Optionally specify values.yaml files
-        - values.yaml
+      valueFiles:
+        - values.yaml  # Use the values.yaml file to provide custom configurations
   project: default
   syncPolicy:
     automated:
@@ -96,6 +96,9 @@ spec:
 
 ```
 
+### deploy helm chart 
 
-
+```
+kubectl apply -f flask-py-db.yaml 
+```
 

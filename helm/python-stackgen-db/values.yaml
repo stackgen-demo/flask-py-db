@@ -1,0 +1,57 @@
+helm_hpa_3e1059c9fe4f5570bec7b2d79bdc0fba:
+    enabled: true
+    max_replicas: 2
+    min_replicas: 1
+    name: flask-py-db
+    target_cpu_utilization_percentage: 50
+    target_memory_utilization_percentage: 50
+    workload_kind: Deployment
+    workload_name: flask-py-db
+helm_ingress_826a3eb1220557e7ae14b4b1aad83064:
+    annotations:
+        kubernetes.io/ingress.allow-http: "false"
+    class_name: flask-py-db
+    default_backend_name: flask-py-db
+    default_backend_port: 5000
+    labels:
+        service: myapp
+    name: flask-py-db
+    rules: []
+    tls: ""
+helm_service_39a889c5e9fe59318f48f8b65873e073:
+    name: flask-py-db
+    port: 5000
+    protocol: TCP
+    selector_labels:
+        service: myapp
+    target_port: 5000
+    type: ClusterIP
+helm_service_account_7968eef0c21054f1a3b1d2597f4246f2:
+    annotations: {}
+    automount: false
+    labels: {}
+    name: flask-py-db
+helm_workload_b5dbc7dcad83567a8b546f32d704016b:
+    env:
+        DB_HOST: ""
+        DB_NAME: ""
+        DB_PASSWORD: ""
+        DB_PORT: ""
+        DB_SCHEMA: ""
+        DB_USERNAME: ""
+    env_from_config: []
+    env_from_secret: []
+    image: sangam14/flask-crud
+    image_pull_policy: Always
+    image_pull_secret: null
+    image_tag: latest
+    kind: Deployment
+    labels:
+        service: myapp
+    name: flask-py-db
+    port: 5000
+    protocol: TCP
+    replicas: 1
+    service_account: flask-py-db
+    volume_mounts: []
+    volumes: []
