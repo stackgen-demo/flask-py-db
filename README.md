@@ -36,3 +36,66 @@ volumes:
   postgres-data:
 
 ```
+
+### export generated helm IaC
+
+
+
+### Install ArgoCD 
+
+```
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+```
+### Port forwarding 
+
+```
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+
+Forwarding from 127.0.0.1:8080 -> 8080
+Forwarding from [::1]:8080 -> 8080
+
+```
+
+open ArgoCD URL 
+https://localhost:8080/
+
+
+
+get the initial admin password. By default, it is stored as a secret in the ArgoCD namespace
+
+```
+kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d
+```
+
+write deployement file for our helm chart 
+
+```
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: guestbook-helm
+  namespace: argocd
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  source:
+    chart: guestbook  # Specify the chart name
+    repoURL:   # Helm chart repository URL
+    targetRevision: HEAD  # Could be a tag, branch, or version number
+    helm:
+      valueFiles:  # Optionally specify values.yaml files
+        - values.yaml
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+```
+
+
+
+
